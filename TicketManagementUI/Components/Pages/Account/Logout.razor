@@ -1,0 +1,13 @@
+﻿@page "/logout"
+
+@using Domain.Entities
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> signInManager;
+@inject NavigationManager nav;
+
+@code{
+    protected override async Task OnInitializedAsync(){
+        await signInManager.SignOutAsync();
+        nav.NavigateTo("/login");
+    }
+}
