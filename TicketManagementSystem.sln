@@ -5,9 +5,9 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{D0762239-B400-4DBB-8597-E94E2B29E6A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{0F505968-0913-474B-8D3F-8A3560C424ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{0F505968-0913-474B-8D3F-8A3560C424ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketManagementUI", "TicketManagementUI\TicketManagementUI.csproj", "{5F1AA97A-6F73-4E9E-9671-631DFF0FD104}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketManagementUI", "TicketManagementUI\TicketManagementUI.csproj", "{5F1AA97A-6F73-4E9E-9671-631DFF0FD104}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
