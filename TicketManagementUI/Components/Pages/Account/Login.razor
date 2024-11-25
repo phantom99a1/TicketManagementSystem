@@ -6,9 +6,9 @@
 @using Microsoft.AspNetCore.Identity
 
 @inject IAccountService accountService;
-@inject SignInManager<User> signInManager;
 @inject NavigationManager nav;
 
+@rendermode InteractiveServer
 
 <section class="vh-100">
     <div class="container-fluid h-custom">
@@ -58,8 +58,7 @@
             alert?.ShowFailed(verify.ErrorMessage);
             return;
         }
-        await signInManager.PasswordSignInAsync(verify.Value ?? "", Input.Password, Input.Remember, false);
-        nav.NavigateTo("/");
+        nav.NavigateTo($"/processor/{verify.Value}/{Input.Password}/{Input.Remember}");
     }
 
     private sealed class InputModel{

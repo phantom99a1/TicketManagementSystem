@@ -15,5 +15,6 @@ Sign In...
 
     protected override async Task OnInitializedAsync(){
         await signInManager.PasswordSignInAsync(username, password, rememberme, false);
+        nav.NavigateTo("/");
     }
 }
