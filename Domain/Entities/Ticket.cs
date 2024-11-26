@@ -19,12 +19,12 @@ namespace Domain.Entities
 
         public DateTime ExpectedDate { get; set; }
 
-        public string AssignedToId { get; set; }
+        public string? AssignedToId { get; set; }
 
         [ForeignKey(nameof(AssignedToId))]
         public User? AssignedTo { get; set; }
 
-        public string RaisedBy { get; set; }
+        public string? RaisedBy { get; set; }
 
         [ForeignKey(nameof(RaisedBy))]
         public User? User { get; set; }
