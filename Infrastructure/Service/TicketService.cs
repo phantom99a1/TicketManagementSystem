@@ -34,7 +34,20 @@ namespace Infrastructure.Service
 
         public List<GetTicketResponse> GetTickets(GetTicketRequest request)
         {
-            throw new NotImplementedException();
+            var result = unitOfWork.TicketRepository.GetTickets(request);
+            return result.Select(x => new GetTicketResponse
+            {
+                TicketId = x.TicketId,
+                Summary = x.Summary,
+                Description = x.Description,
+                ProductId = x.ProductId,
+                PriorityId = x.PriorityId,
+                CategoryId = x.CategoryId,
+                Status = x.Status,
+                RaisedBy = x.User?.Email,
+                CreatedDate = x.RaisedDate,
+                ExpectedDate = x.ExpectedDate,
+            }).ToList();
         }
     }
 }

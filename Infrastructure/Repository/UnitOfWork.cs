@@ -1,13 +1,14 @@
 ﻿using Domain.Repository;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Infrastructure.Data;
 using System.Collections;
 
 namespace Infrastructure.Repository
 {
-    public class UnitOfWork(IdentityDbContext context) : IUnitOfWork
+    public class UnitOfWork(AppDBContext context, ITicketRepository ticketRepository) : IUnitOfWork
     {
-        private readonly IdentityDbContext context = context;
+        private readonly AppDBContext context = context;
         private Hashtable repositories;
+        public ITicketRepository TicketRepository { get; } = ticketRepository;
 
         public void Dispose()
         {

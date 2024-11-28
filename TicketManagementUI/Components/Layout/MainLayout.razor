@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Components.Authorization
 @using MudBlazor
+@using Microsoft.AspNetCore.Components.Sections
 @inherits LayoutComponentBase
 
 <MudThemeProvider />
@@ -10,13 +11,17 @@
     </div>
 
     <main>
-        <div class="top-row px-4">
+        <div class="top-row d-flex justify-content-between" style="padding:35px">
+            <div style="font-size: 25px">
+                <SectionOutlet SectionName="page-title"></SectionOutlet>
+            </div>
+
             <AuthorizeView>
                 <a href="/logout">Logout</a>
             </AuthorizeView>
         </div>
 
-        <article class="content px-4">
+        <article class="content">
             @Body
         </article>
     </main>

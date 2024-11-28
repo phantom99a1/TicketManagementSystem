@@ -1,0 +1,73 @@
+﻿@page "/ticket"
+
+<SectionContent SectionName="page-title">Ticket Management</SectionContent>
+
+@rendermode InteractiveServer
+
+@inject ITicketService ticketService
+<MudPopoverProvider />
+
+<style>
+    .filter-panel{
+        padding: 0 20px;
+        position: relative;
+        background-color: var(--light-green);
+        width: 100%;
+    }
+
+    .mud-input{
+        background-color: white !important;
+    }
+
+    .mud-table-row{
+        cursor: pointer !important;
+    }
+</style>
+
+<div class="filter-panel">
+    Filter here
+</div>
+
+<MudDataGrid @ref="dataGrid" 
+    T="GetTicketResponse" 
+    SortMode="@SortMode.None" 
+    ServerData="ServerReload" 
+>   
+    <Columns>
+        <PropertyColumn Property="x => x.TicketIdView" Title="Ticket Id" />   
+        <PropertyColumn Property="x => x.Summary" />
+        <PropertyColumn Property="x => x.Product" />
+        <PropertyColumn Property="x => x.Category" />
+        <PropertyColumn Property="x => x.Priority" />
+        <PropertyColumn Property="x => x.Status" />
+        <PropertyColumn Property="x => x.RaisedBy" Title="Raised By" />
+        <PropertyColumn Property="x => x.ExpectedDate" Title="Expected Date" Format="dd MMM yyyy" />
+        <PropertyColumn Property="x => x.CreatedDate" Title="Created Date" Format="dd MMM yyyy" />
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="GetTicketResponse" />
+    </PagerContent>
+</MudDataGrid>
+
+@code{
+    MudDataGrid<GetTicketResponse> dataGrid;
+    string searchString = null;
+
+    /// <summary>
+    /// Here we simulate getting the paged, filtered and ordered data from the server
+    /// </summary>
+    private async Task<GridData<GetTicketResponse>> ServerReload(GridState<GetTicketResponse> state)
+    {
+        IEnumerable<GetTicketResponse> getTickets = ticketService.GetTickets(new Domain.DTO.Request.GetTicketRequest());
+        await Task.Delay(300);
+
+        var totalItems = getTickets.Count();
+
+        var pagedData = getTickets.Skip(state.Page * state.PageSize).Take(state.PageSize).ToArray();
+        return new GridData<GetTicketResponse>
+            {
+                TotalItems = totalItems,
+                Items = pagedData
+            };
+    }
+}

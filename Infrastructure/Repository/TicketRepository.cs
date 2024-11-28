@@ -1,13 +1,12 @@
 ﻿using Domain.DTO.Request;
 using Domain.Entities;
 using Domain.Repository;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Infrastructure.Repository
 {
-    public class TicketRepository(IdentityDbContext dbContext) : GenericRepository<Ticket>(dbContext), ITicketRepository
+    public class TicketRepository(AppDBContext dbContext) : GenericRepository<Ticket>(dbContext), ITicketRepository
     {
         public List<Ticket> GetTickets(GetTicketRequest request)
         {
@@ -53,7 +52,7 @@ namespace Infrastructure.Repository
                 query = query.Where(x => request.RaisedBy.Contains(x.RaisedBy));
             }
 
-            return [.. query];
+            return [.. query.OrderByDescending(x => x.RaisedDate)];
         }
     }
 }
